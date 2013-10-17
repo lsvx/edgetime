@@ -1,0 +1,54 @@
+/*
+ *     Base.css (v0.2)
+ *     A lightweight CSS starter framework by @visualidiot.
+ */
+ 
+* { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+img { border: none; -ms-interpolation-mode: bicubic; image-rendering: optimizeQuality; }
+
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+
+input[type=search] { -webkit-appearance: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+	nav ul,ul { list-style: none; }
+
+.transition, header#top *, section#blocks * { -webkit-transition-duration: .5s; -webkit-transition-timing-function: ease-in-out; -moz-transition-duration: .5s; -moz-transition-timing-function: ease-in-out; transition-duration: .5s; transition-timing-function: ease-in-out; -o-transition-duration: .5s; -o-transition-timing-function: ease-in-out; }
+	.transition.opacity { -webkit-transition-property: opacity; -moz-transition-property: opacity; transition-property: opacity; -o-transition-property: opacity; }
+	.transition.color { -webkit-transition-property: color; -moz-transition-property: color; transition-property: color; -o-transition-property: color; }
+	.transition.background { -webkit-transition-property: background; -moz-transition-property: background; transition-property: background; -o-transition-property: background; }
+	.transition.border { -webkit-transition-property: border; -moz-transition-property: border; transition-property: border; -o-transition-property: border; }
+	.transition.margin { -webkit-transition-property: margin; -moz-transition-property: margin; transition-property: margin; -o-transition-property: margin; }
+	.transition.padding { -webkit-transition-property: padding; -moz-transition-property: padding; transition-property: padding; -o-transition-property: padding; }
+.transition.all, header#top * { -webkit-transition-property: all; -moz-transition-property: all; transition-property: all; -o-transition-property: all; }
+.notransition { -webkit-transition: none; -moz-transition: none; transition: none; -o-transition: none; }
+
+.hidden { text-indent: -999em; }
+	.block.hidden { position: absolute; left: -999em; top: -999em; }
+
+.radius { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -khtml-border-radius: 5px; -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; }
+
+.group { zoom: 1; overflow: auto; }
+	.group:before, .group:after { content: ''; display: table; }
+	.group:after { clear: both; }
+
+.ghost { opacity: .5; filter: alpha(opacity=50); }
+	.ghost.super { opacity: .2; filter: alpha(opacity=20); }
+	.ghost.sub { opacity: .8; filter: alpha(opacity=80); }
+
+.align { margin: 0 auto; }
+	.align.text { text-align: center; }
+	.align.vertical { vertical-align: center; position: absolute; left: 50%; top: 50%; }
+
+.float { float: inherit; } /* This should not be used on its own: class="float left" */
+	.float.left { float: left; }
+	.float.right { float: right; }
+
+.clear { clear: both; }
+	.clear.left { clear: left; }
+	.clear.right { clear: right; }
+
+.debug *[href='#'], .debug *[src=''], .debug *[alt=''], .debug *:not([title]), .debug *:not([src]), .debug *:not([href]), .debug *:not([alt]), .debug *[title=''], .debug *[style] { outline: 1px dotted #f0f; }
+	*:hover .debug * { background: rgba(0,0,0,.3); outline: 1px solid rgba(0,0,0,.5); }
