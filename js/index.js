@@ -1,28 +1,33 @@
 (function(){
     // A helper function to rotate dom elements to a specified angle.
     var rotate = function( el, deg ) {
+        // If the `el` paramenter is a string, find the first element matching
+        // that selector.
+        if ( Object.prototype.toString.call( el ) === "[object String]" ) {
+            el = document.querySelector( el );
+        }
 
-        $( el ).css({
-                "-webkit-transform": "rotate(" + deg + "deg)",
-                "-moz-transform": "rotate(" + deg + "deg)",
-                "-ms-transform": "rotate(" + deg + "deg)",
-                "-o-transform": "rotate(" + deg + "deg)",
-                "transform": "rotate(" + deg + "deg)"
-            });
-
+        el.style.cssText = [
+            "-webkit-transform: rotate(" + deg + "deg);",
+            "-moz-transform: rotate(" + deg + "deg);",
+            "-ms-transform: rotate(" + deg + "deg);",
+            "-o-transform: rotate(" + deg + "deg);",
+            "transform: rotate(" + deg + "deg);"
+        ].join( " " );
     };
 
     var edgetime = function() {
 
         this.init = function() {
             // Fill the list items for dates and rotate them.
-            $.each( $( "li" ), function( index ) {
-                // Set the inner HTML of the list items to the numbers from 1-31.
-                $( this ).html( index < 31 ? index + 1 : 1 );
+            for ( var i = 0, lis = document.getElementsByTagName( "li" ); i < lis.length; i++ ) {
+                // Set the inner HTML of the list items to the numbers from
+                // 1-31 plus an extra `1` so you can see the transition from
+                // `31` to `1` properly.
+                lis[ i ].innerHTML = i < 31 ? i + 1 : 1;
                 // Rotate the dates.
-                rotate( this, index * 10 );
-
-            });
+                rotate( lis[ i ], i * 10 );
+            }
 
             // Grab a new date.
             var time = new Date();
