@@ -28,37 +28,40 @@
                 rotate(lis[i], i * 10);
             }
      
+            // Find the initial hand angles.
+            var time = new Date(),
+                hours = time.getHours(),
+                realHours = time.getHours();
+            // Adjust the hours for 12-hour format.
+            hours = hours % 12;
+            if (hours === 0) {
+                hours = 12;
+            }
+            // Set the initial angles for clock hands.
+            this.secondAngle = time.getSeconds() * 6;
+            this.minuteAngle = time.getMinutes() * 6 + (this.secondAngle / 60);
+            this.hourAngle = (hours * 30) + (this.minuteAngle / 12);
+
             // Make the clock tick every second.
-            this.tick(new Date());
+            this.tick(new Date(), time);
         };
 
         this.init();
     };
 
-    edgetime.prototype.tick = function(time) {
-        // Save a reference to the hours, both adjusted for 12-hour format and
-        // actual hours.
-        var hours = time.getHours(),
-            realHours = time.getHours();
-
-        // Adjust the hours for 12-hour format.
-        hours = hours % 12;
-        if (hours === 0) {
-            hours = 12;
-        }
-
+    edgetime.prototype.tick = function(time, last) {
         // Calculate the angles for clock hands.
-        this.secondAngle = time.getSeconds() * 6;
-        this.minuteAngle = time.getMinutes() * 6 + (this.secondAngle / 60);
-        this.hourAngle = (hours * 30) + (this.minuteAngle / 12);
-        this.dateAngle = ((time.getDate() - 1) + (realHours - 12 + 1) / 24) * -10;
+        this.secondAngle += (time - last) / 1000 * 6;
+        this.minuteAngle += (time - last) / 1000 / 60 * 6;
+        this.hourAngle += (time - last) / 1000 / 60 / 60 * 30;
+        this.dateAngle = ((time.getDate() - 1) + (time.getHours() - 12 + 1) / 24) * -10;
 
         // Draw the clock.
         this.draw();
 
         // Call itself so that the clock keeps ticking.
         setTimeout((function(_this) {
-            return function() {_this.tick(new Date());};
+            return function() {_this.tick(new Date(), time);};
         })(this), 1000);
     };
 
