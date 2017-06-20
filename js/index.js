@@ -29,25 +29,21 @@
             }
      
             // Make the clock tick every second.
-            this.tick();
+            this.tick(new Date());
         };
 
         this.init();
     };
 
-    edgetime.prototype.tick = function() {
-        // Grab a new date.
-        var time = new Date();
-
+    edgetime.prototype.tick = function(time) {
         // Save a reference to the hours, both adjusted for 12-hour format and
         // actual hours.
         var hours = time.getHours(),
             realHours = time.getHours();
 
         // Adjust the hours for 12-hour format.
-        if (hours >= 13) {
-            hours -= 12;
-        } else if (hours === 0) {
+        hours = hours % 12;
+        if (hours === 0) {
             hours = 12;
         }
 
@@ -62,7 +58,7 @@
 
         // Call itself so that the clock keeps ticking.
         setTimeout((function(_this) {
-            return function() {_this.tick.call( _this );};
+            return function() {_this.tick(new Date());};
         })(this), 1000);
     };
 
